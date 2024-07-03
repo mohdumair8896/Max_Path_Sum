@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: max-path-sum1-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: max-path-sum1
+  template:
+    metadata:
+      labels:
+        app: max-path-sum1
+    spec:
+      containers:
+      - name: max-path-sum1
+        image: gcr.io/max_path_sum/max-path-sum1:latest
+        ports:
+        - containerPort: 8080
