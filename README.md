@@ -99,7 +99,7 @@ FROM python:3.9-slim
 # Set the working directory in the container
 WORKDIR /home/umair/app
 
-# Copy the current directory contents into the container at /usr/src/app
+# Copy the current directory contents into the container at /home/umair/app
 COPY . .
 
 # Install any needed packages specified in requirements.txt (if any)
@@ -113,10 +113,10 @@ CMD ["python", "./max_path_sum1.py"]
 ```
 **Building Docker Image**
 ```bash
-docker build -t max-path-sum .
+docker build -t max-path-sum1 .
 ```
 ```bash
-docker run -it max-path-sum
+docker run -it max-path-sum1
 ```
 ## Multi-container deployment using Docker-Compose
 
@@ -174,7 +174,7 @@ docker postgres
 ```bash
 psycopg2-binary
 ```
-**Update max_path_sum.py:**
+**Update max_path_sum1.py:**
 ```bash
 import psycopg2
 import os
@@ -252,7 +252,7 @@ This code ensures that the program can scale the application by adding more serv
   ```
 - Setting the GCP Project:
  ```bash
-  gcloud config set project max-path-sum
+  gcloud config set project max-path-sum1
   ```
 **Step 2: Containering the Application**
 ```bash
@@ -303,20 +303,20 @@ Saved file as deployment.yaml
   apiVersion: apps/v1
   kind: Deployment
   metadata:
-    name: max-path-sum-deployment
+    name: max-path-sum1-deployment
   spec:
     replicas: 3
     selector:
       matchLabels:
-        app: max-path-sum
+        app: max-path-sum1
     template:
       metadata:
         labels:
-          app: max-path-sum
+          app: max-path-sum1
       spec:
         containers:
-        - name: max-path-sum
-          image: gcr.io/YOUR_PROJECT_ID/max-path-sum:latest
+        - name: max-path-sum1
+          image: gcr.io/max-path-sum1/max-path-sum1:latest
           ports:
           - containerPort: 8080
   ``` 
@@ -424,10 +424,10 @@ CMD ["python", "./max_path_sum1.py"]
 ```
 **Building Docker Image**
 ```bash
-docker build -t max-path-sum .
+docker build -t max-path-sum1 .
 ```
 ```bash
-docker run -it max-path-sum
+docker run -it max-path-sum1
 ```
 ## Multi-container deployment using Docker-Compose
 
@@ -614,20 +614,20 @@ Saved file as deployment.yaml
   apiVersion: apps/v1
   kind: Deployment
   metadata:
-    name: max-path-sum-deployment
+    name: max-path-sum1-deployment
   spec:
     replicas: 3
     selector:
       matchLabels:
-        app: max-path-sum
+        app: max-path-sum1
     template:
       metadata:
         labels:
-          app: max-path-sum
+          app: max-path-sum1
       spec:
         containers:
-        - name: max-path-sum
-          image: gcr.io/YOUR_PROJECT_ID/max-path-sum:latest
+        - name: max-path-sum1
+          image: gcr.io/max-path-sum/max-path-sum1:latest
           ports:
           - containerPort: 8080
   ``` 
@@ -666,7 +666,7 @@ kubectl apply -f service.yaml
     --image-family debian-9 \
     --image-project debian-cloud \
     --metadata startup-script='#!/bin/bash
-      docker run gcr.io/ma-path-sum1/max-path-sum1:latest'
+      docker run gcr.io/max-path-sum/max-path-sum1:latest'
   ```
 
 - Created a Managed Instance Group
